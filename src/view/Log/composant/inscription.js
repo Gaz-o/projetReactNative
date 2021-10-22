@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { setter } from "../../../function/function";
 import { View, Text, TextInput } from "react-native";
 import Service from "../../../../services";
+import { setStorageValue } from "../../../function/function";
 
 function Inscription(props) {
   const [Pseudo, setPseudo] = useState("");
@@ -16,6 +16,7 @@ function Inscription(props) {
       mail: Mail,
       password: Password,
     };
+    console.log(body);
     let creation = await Service.post(path, body);
     if (creation.data.success) {
       let path = "/user/login";
@@ -24,15 +25,13 @@ function Inscription(props) {
         password: Password,
       };
       let isConnecter = await Service.post(path, body);
-      if (isConnecter.data.success) {
-        localStorage.setItem("jwt", isConnecter.data.token);
-        setIsConnect(isConnecter.data.success);
-        setPseudo("");
-        setMail("");
-        setPassword("");
+      if (isConnecter?.data?.success) {
+        setStorageValue(isConnecter?.data?.token, props.setIsConnect);
       } else {
         setErrMessage(isConnecter.data.message);
       }
+    } else {
+      setErrMessage(creation.data.message)
     }
   };
 
@@ -43,21 +42,21 @@ function Inscription(props) {
         type="text"
         name="pseudo"
         value={Pseudo}
-        onChange={(e) => setter(setPseudo, e)}
+        onChangeText={setPseudo}
       ></TextInput>
       <Text>Votre address mail</Text>
       <TextInput
         type="email"
         name="mail"
         value={Mail}
-        onChange={(e) => setter(setMail, e)}
+        onChangeText={setMail}
       ></TextInput>
       <Text>Votre code secret</Text>
       <TextInput
         type="password"
         name="password"
         value={Password}
-        onChange={(e) => setter(setPassword, e)}
+        onChangeText={setPassword}
       ></TextInput>
       <Text className="ErrMessage">{ErrMessage}</Text>
       <Text className="BtnLogConnect" onPress={btnCreation}>

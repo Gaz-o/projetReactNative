@@ -8,7 +8,7 @@ function Deconnect(props) {
     try {
       let logout = await Service.postLogout();
       if (logout?.data?.success) {
-        removeStorageValue("jwt", props.setIsConnect());
+        removeStorageValue(props.setIsConnect);
       }
     } catch {
       console.log(logout?.data?.message);

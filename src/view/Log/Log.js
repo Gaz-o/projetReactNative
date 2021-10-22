@@ -17,14 +17,15 @@ export default function Log() {
       setAffichage("Deconnexion");
       setContenu("J'espere que les Dieux etait avec vous aujourd'hui");
     } else {
+      setIsConnect(false)
       setAffichage("Connexion");
       setContenu(`Si vous souhaiter créer un nouveau Sponsor 
       prennez une autre pierre`);
     }
-  }, [isConnect !== undefined]);
+  }, [isConnect]);
 
   useEffect(() => {
-    getStorageValue("jwt" , setIsConnect);
+    getStorageValue(setIsConnect);
   }, []);
   
   console.log("blabla");

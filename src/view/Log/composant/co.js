@@ -17,7 +17,7 @@ function Connection(props) {
     let isConnecter = await Service.post(path, body);
     if (isConnecter?.data?.success) {
       console.log(isConnecter?.data?.token);
-      setStorageValue("jwt", isConnecter?.data?.token);
+      setStorageValue(isConnecter?.data?.token, props.setIsConnect);
     } else {
       setErrMessage(isConnecter?.data?.message);
     }

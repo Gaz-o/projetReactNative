@@ -24,9 +24,13 @@ function Connect(props) {
       ) : (
         <Text className="BtnLog" onPress={btnLog}></Text>
       )}
-      {BtnLog === "Inscription" ? <Inscription /> : <Connection />}
+      {BtnLog !== "Inscription" ? (
+        <Inscription {...props} />
+      ) : (
+        <Connection {...props} />
+      )}
     </View>
   );
 }
 
-export default Connect
+export default Connect;

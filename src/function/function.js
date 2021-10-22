@@ -1,50 +1,52 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const setter = (set, e) => {
-  set(e.target.value);
-};
-
 const tokenHeaders = () => {
   const token = localStorage.getItem("jwt");
   return { Authorization: "Bearer " + token };
 };
 
-const getStorageValue = async (get, setIsConnect) => {
-  console.log(get, "storage");
+const getStorageValue = async (setIsConnect) => {
+  console.log("save", "storage");
   try {
-    const response = await AsyncStorage.getItem(get);
-    console.log("recuperation stockage");
-    setIsConnect(true)
+    const response = await AsyncStorage.getItem("save");
+    console.log(response);
+    if (response !== null) {
+      console.log("recuperation stockage");
+      setIsConnect(true);
+    } else {
+      console.log("pas de connection enregistré");
+      setIsConnect(false);
+    }
   } catch (e) {
-    setIsConnect(false)
+    setIsConnect(false);
     console.log("erreur de recuperation stockage");
   }
 };
 
-const setStorageValue = async (set, value, setIsConnect) => {
+const setStorageValue = async (value, setIsConnect) => {
+  console.log("save", setIsConnect, "storage");
   try {
-    await AsyncStorage.setItem(set, value);
-    console.log("création stockage");    
-    setIsConnect(true)
+    await AsyncStorage.setItem("save", value);
+    console.log("création stockage");
+    setIsConnect(true);
   } catch (e) {
-    setIsConnect(false)
+    setIsConnect(false);
     console.log("erreur de création stockage");
   }
 };
 
-const removeStorageValue = async (target, setIsConnect) => {
+const removeStorageValue = async (setIsConnect) => {
   try {
-    setIsConnect(false)
-    let response = await AsyncStorage.removeItem(target);
-    console.log("effacement du stockage", response);
+    await AsyncStorage.removeItem("save");
+    console.log("effacement du stockage");
+    setIsConnect(false);
   } catch (e) {
-    setIsConnect(true)
+    setIsConnect();
     return console.log("erreur d'effacement du stockage");
-  }  
+  }
 };
 
 module.exports = {
-  setter,
   tokenHeaders,
   getStorageValue,
   setStorageValue,
