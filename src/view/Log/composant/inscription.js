@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, ImageBackground } from "react-native";
 import Service from "../../../../services";
+import styles from "../../../css/homeCss";
 import { setStorageValue } from "../../../function/function";
 
 function Inscription(props) {
@@ -31,39 +32,47 @@ function Inscription(props) {
         setErrMessage(isConnecter.data.message);
       }
     } else {
-      setErrMessage(creation.data.message)
+      setErrMessage(creation.data.message);
     }
   };
 
   return (
-    <View className="LogInput">
-      <Text>Votre Pseudo</Text>
-      <TextInput
-        type="text"
-        name="pseudo"
-        value={Pseudo}
-        onChangeText={setPseudo}
-      ></TextInput>
-      <Text>Votre address mail</Text>
-      <TextInput
-        type="email"
-        name="mail"
-        value={Mail}
-        onChangeText={setMail}
-      ></TextInput>
-      <Text>Votre code secret</Text>
-      <TextInput
-        type="password"
-        name="password"
-        value={Password}
-        onChangeText={setPassword}
-      ></TextInput>
-      <Text className="ErrMessage">{ErrMessage}</Text>
-      <Text className="BtnLogConnect" onPress={btnCreation}>
-        Création
-      </Text>
+    <View style={styles.ConteneurMarbre}>
+      <ImageBackground
+        source={require("../../../img/marbre2.jpg")}
+        style={styles.Marbre}
+      >
+        <Text style={styles.TextA}>Votre Pseudo</Text>
+        <TextInput
+          style={styles.input}
+          type="text"
+          name="pseudo"
+          value={Pseudo}
+          onChangeText={setPseudo}
+        ></TextInput>
+        <Text style={styles.TextA}>Votre address mail</Text>
+        <TextInput
+          style={styles.input}
+          type="email"
+          name="mail"
+          value={Mail}
+          onChangeText={setMail}
+        ></TextInput>
+        <Text style={styles.TextA}>Votre code secret</Text>
+        <TextInput
+          style={styles.input}
+          type="password"
+          name="password"
+          value={Password}
+          onChangeText={setPassword}
+        ></TextInput>
+        <Text style={styles.TextAErr}>{ErrMessage}</Text>
+        <Text style={styles.btnMarbre} onPress={btnCreation}>
+          Création
+        </Text>
+      </ImageBackground>
     </View>
   );
 }
 
-export default Inscription
+export default Inscription;

@@ -1,6 +1,7 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, ImageBackground, Button } from "react-native";
 import { removeStorageValue } from "../../../function/function.js";
+import styles from "../../../css/homeCss";
 import Service from "../../../../services";
 
 function Deconnect(props) {
@@ -9,6 +10,7 @@ function Deconnect(props) {
       let logout = await Service.postLogout();
       if (logout?.data?.success) {
         removeStorageValue(props.setIsConnect);
+        alert(logout?.data?.message);
       }
     } catch {
       console.log(logout?.data?.message);
@@ -16,16 +18,20 @@ function Deconnect(props) {
   };
 
   return (
-    <View className="Log">
-      <View className="LogInput">
-        <Text>Merci de votre</Text>
-        <Text>passage</Text>
-        <Text className="BtnLogConnect" onPress={btnLogOut}>
-          Deconnecter
-        </Text>
-      </View>
+    <View style={styles.ConteneurMarbre}>
+      <ImageBackground
+        source={require("../../../img/marbre2.jpg")}
+        style={styles.Marbre}
+      >
+        <View>
+          <Text style={styles.TextA}>Merci de votre passage</Text>
+          <Text style={styles.btnMarbre} onPress={btnLogOut}>
+            Déconnecter
+          </Text>
+        </View>
+      </ImageBackground>
     </View>
   );
 }
 
-export default Deconnect
+export default Deconnect;

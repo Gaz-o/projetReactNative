@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { setStorageValue } from "../../../function/function";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, ImageBackground } from "react-native";
 import Service from "../../../../services";
+import styles from "../../../css/homeCss";
 
 function Connection(props) {
   const [Mail, setMail] = useState("");
@@ -24,27 +25,34 @@ function Connection(props) {
   };
 
   return (
-    <View className="LogInput">
-      <Text className="LogInputP">Votre address mail</Text>
-      <TextInput
-        type="email"
-        name="mail"
-        value={Mail}
-        onChangeText={setMail}
-      />
-      <Text className="LogInputP">Votre code secret</Text>
-      <TextInput
-        type="password"
-        name="password"
-        value={Password}
-        onChangeText={setPassword}
-      ></TextInput>
-      <Text className="ErrMessage">{ErrMessage}</Text>
-      <Text className="BtnLogConnect" onPress={btnConnecter}>
-        Connecter
-      </Text>
+    <View style={styles.ConteneurMarbre}>
+      <ImageBackground
+        source={require("../../../img/marbre2.jpg")}
+        style={styles.Marbre}
+      >
+        <Text style={styles.TextA}>Votre address mail</Text>
+        <TextInput
+          style={styles.input}
+          type="email"
+          name="mail"
+          value={Mail}
+          onChangeText={setMail}
+        />
+        <Text style={styles.TextA}>Votre code secret</Text>
+        <TextInput
+          style={styles.input}
+          type="password"
+          name="password"
+          value={Password}
+          onChangeText={setPassword}
+        ></TextInput>
+        <Text style={styles.TextAErr}>{ErrMessage}</Text>
+        <Text style={styles.btnMarbre} onPress={btnConnecter}>
+          Connecter
+        </Text>
+      </ImageBackground>
     </View>
   );
 }
 
-export default Connection
+export default Connection;

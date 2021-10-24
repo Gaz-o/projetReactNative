@@ -2,18 +2,18 @@ import React from "react";
 import { View, Text, ImageBackground } from "react-native";
 import styles from "../css/homeCss";
 
-function Forge() {
+function Combat() {
 
-  return (
-    <View style={styles.container}>
+    return (
+        <View style={styles.container}>
       <ImageBackground
-        source={require("../img/forge.jpg")}
+        source={require("../img/combat.jpg")}
         style={styles.ImageHomeBackGround}
       >
-          <Text>A la Forge</Text>
+          <Text>TEST Combat</Text>
       </ImageBackground>
     </View>
   );
 }
 
-export default Forge
+export default Combat;

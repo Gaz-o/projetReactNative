@@ -50,11 +50,23 @@ const Service = {
     removeStorageValue("jwt");
     return base.delete("/user/delete", { data: body });
   },
-  postPersonnage(body) {
-    return base.post("/personnage/add", body, { headers: tokenHeaders() });
+  async postPersonnage(body) {
+    try {
+      const token = await tokenHeaders()
+      console.log("token", token);
+      return base.post("/personnage/add", { headers: token });
+    } catch (e) {
+      console.log(e);
+    }
   },
-  getPersonnage() {
-    return base.get("/personnage/personnageactif", { headers: tokenHeaders() });
+  async getPersonnage() {
+    try {
+      const token = await tokenHeaders()
+      console.log("token", token);
+      return base.get("/personnage/personnageactif", { headers: token });
+    } catch (e) {
+      console.log(e);
+    }
   },
   getPersonnages() {
     return base.get("/personnage/famepersonnages");

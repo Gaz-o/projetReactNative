@@ -1,8 +1,18 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const tokenHeaders = () => {
-  const token = localStorage.getItem("jwt");
-  return { Authorization: "Bearer " + token };
+const tokenHeaders = async () => {
+  try {
+    const token = await AsyncStorage.getItem("save");
+    console.log("test", token);
+    if (token !== null) {
+      console.log("recuperation stockage");
+      return { Authorization: "Bearer " + token };
+    } else {
+      console.log("pas de connection enregistré");
+    }
+  } catch (e) {
+    console.log("Erreur de token");
+  }
 };
 
 const getStorageValue = async (setIsConnect) => {

@@ -3,6 +3,7 @@ import React from "react";
 import Inscription from "./inscription";
 import Connection from "./co";
 import { Text, View } from "react-native";
+import styles from "../../../css/homeCss";
 
 function Connect(props) {
   const [BtnLog, setBtnLog] = useState("Inscription");
@@ -18,11 +19,11 @@ function Connect(props) {
   return (
     <View className="Log">
       {props.isConnect !== true ? (
-        <Text className="BtnLog" onPress={btnLog}>
+        <Text style={styles.btnMarbre} onPress={btnLog}>
           {BtnLog}
         </Text>
       ) : (
-        <Text className="BtnLog" onPress={btnLog}></Text>
+        <Text style={styles.btnMarbre} onPress={btnLog}></Text>
       )}
       {BtnLog !== "Inscription" ? (
         <Inscription {...props} />
@@ -34,3 +35,5 @@ function Connect(props) {
 }
 
 export default Connect;
+
+
