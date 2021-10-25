@@ -4,7 +4,7 @@ import Service from "../../../../services";
 import styles from "../../../css/homeCss";
 import { setStorageValue } from "../../../function/function";
 
-function Inscription(props) {
+function Inscription({navigation}) {
   const [Pseudo, setPseudo] = useState("");
   const [Mail, setMail] = useState("");
   const [Password, setPassword] = useState("");
@@ -27,7 +27,8 @@ function Inscription(props) {
       };
       let isConnecter = await Service.post(path, body);
       if (isConnecter?.data?.success) {
-        setStorageValue(isConnecter?.data?.token, props.setIsConnect);
+        setStorageValue(isConnecter?.data?.token);
+        navigation.navigate("NavBar")
       } else {
         setErrMessage(isConnecter.data.message);
       }
