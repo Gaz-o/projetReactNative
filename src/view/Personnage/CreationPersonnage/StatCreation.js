@@ -39,7 +39,6 @@ function StatCreation(props) {
         reputation: StatAgi + StatFor + StatDef + StatPV,
       };
       let creationPersonnage = await Service.postPersonnage(body);
-      console.log(creationPersonnage.data.success);
       if (creationPersonnage.data.success) {
         props.recupUser();
         props.setBtnParam("");

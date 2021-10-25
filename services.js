@@ -2,6 +2,7 @@ import axios from "axios";
 import { removeStorageValue, tokenHeaders } from "./src/function/function.js";
 
 const baseURL = "http://192.168.1.10:5000";
+//https://glazo-back.osc-fr1.scalingo.io
 
 const base = axios.create({
   baseURL,
@@ -53,7 +54,6 @@ const Service = {
   async postPersonnage(body) {
     try {
       const token = await tokenHeaders()
-      console.log("token", token);
       return base.post("/personnage/add", { headers: token });
     } catch (e) {
       console.log(e);
@@ -62,7 +62,6 @@ const Service = {
   async getPersonnage() {
     try {
       const token = await tokenHeaders()
-      console.log("token", token);
       return base.get("/personnage/personnageactif", { headers: token });
     } catch (e) {
       console.log(e);

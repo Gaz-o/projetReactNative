@@ -5,8 +5,10 @@ import Connection from "./co";
 import { Text, View } from "react-native";
 import styles from "../../../css/homeCss";
 
-function Connect(props) {
+function Connect({navigation}) {
   const [BtnLog, setBtnLog] = useState("Inscription");
+
+  console.log(navigation);
 
   const btnLog = () => {
     if (BtnLog === "Inscription") {
@@ -18,22 +20,22 @@ function Connect(props) {
 
   return (
     <View className="Log">
-      {props.isConnect !== true ? (
+      {BtnLog === "Inscription" ? (
         <Text style={styles.btnMarbre} onPress={btnLog}>
           {BtnLog}
         </Text>
       ) : (
-        <Text style={styles.btnMarbre} onPress={btnLog}></Text>
+        <Text style={styles.btnMarbre} onPress={btnLog}>
+          {BtnLog}
+        </Text>
       )}
       {BtnLog !== "Inscription" ? (
-        <Inscription {...props} />
+        <Inscription navigation={navigation} />
       ) : (
-        <Connection {...props} />
+        <Connection navigation={navigation} />
       )}
     </View>
   );
 }
 
 export default Connect;
-
-

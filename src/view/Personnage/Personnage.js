@@ -4,13 +4,19 @@ import StatCreation from "./CreationPersonnage/StatCreation.js";
 import CongedierPersonnage from "./Autre/Congedier.js";
 import { useEffect, useState } from "react";
 import Service from "../../../services";
+import { getStorageValue } from "../../function/function.js";
 import { ImageBackground, Text, View } from "react-native";
 import styles from "../../css/homeCss.js";
 import React from "react";
 
-function Personnage() {
+function Personnage({route, navigation}) {
   const [Combattant, setCombattant] = useState({});
   const [BtnParam, setBtnParam] = useState("");
+  const [isConnect, setIsConnect] = useState();
+
+  useEffect(() => {
+    getStorageValue(setIsConnect);
+  }, []);
 
   const recupUser = async () => {
     let result = await Service.getPersonnage();

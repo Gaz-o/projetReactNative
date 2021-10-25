@@ -1,34 +1,27 @@
-import { useEffect, useState } from "react";
 import Connect from "./composant/connect";
-import Deconnect from "./composant/deco";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ImageBackground, Text, View } from "react-native";
 import { getStorageValue } from "../../function/function.js";
 import styles from "../../css/homeCss";
 
-export default function Log() {
-  const [Contenu, setContenu] = useState();
-  const [Affichage, setAffichage] = useState();
+function Log({navigation}) {
   const [isConnect, setIsConnect] = useState();
-
-  useEffect(() => {
-    if (isConnect === true) {
-      console.log("test");
-      setAffichage("Deconnexion");
-      setContenu("J'espere que les Dieux etait avec vous aujourd'hui");
-    } else {
-      setIsConnect(false);
-      setAffichage("Connexion");
-      setContenu(`Si vous souhaiter créer un nouveau Sponsor 
-      prennez une autre pierre`);
-    }
-  }, [isConnect]);
 
   useEffect(() => {
     getStorageValue(setIsConnect);
   }, []);
 
-  console.log("blabla");
+  useEffect(() => {
+    if (isConnect === true) {
+      navigation.navigate("NavBar")
+    }
+  }, [isConnect]);
+
+  console.log("isConnect", isConnect);
+  console.log(navigation);
+
+  let Contenu = `Si vous souhaiter créer un nouveau Sponsor 
+  prennez une autre pierre`
 
   return (
     <View style={styles.container}>
@@ -46,11 +39,7 @@ export default function Log() {
             </View>
             <View style={styles.ContenuParchemin}>
               <Text style={styles.Text}> {Contenu} </Text>
-              {Affichage !== "Deconnexion" ? (
-                <Connect setIsConnect={setIsConnect} />
-              ) : (
-                <Deconnect setIsConnect={setIsConnect} />
-              )}
+                <Connect navigation={navigation} />
             </View>
             <View style={styles.FooterParchemin}>
               <Text className="FooterLog">
@@ -65,3 +54,5 @@ export default function Log() {
     </View>
   );
 }
+
+export default Log

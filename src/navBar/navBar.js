@@ -1,6 +1,5 @@
 import { Image, StyleSheet } from "react-native";
 import React from "react";
-import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 
 const Tab = createMaterialTopTabNavigator();
@@ -8,18 +7,17 @@ const Tab = createMaterialTopTabNavigator();
 import Home from "../view/home";
 import Forge from "../view/Forge";
 import Combat from "../view/Combat";
-import Log from "../view/Log/Log";
+import Deconnect from "../view/Deconnect.js";
 import Personnage from "../view/Personnage/Personnage.js";
 
-function NavBar() {
+function NavBar({navigation}) {
   return (
-    <NavigationContainer style={stylesApp.body}>
       <Tab.Navigator
         tabBarPosition={"bottom"}
         screenOptions={{
-          tabBarShowIcon : true,
-          tabBarShowLabel : false,
-          tabBarPressColor : "rgb(120, 0, 0)",
+          tabBarShowIcon: true,
+          tabBarShowLabel: false,
+          tabBarPressColor: "rgb(120, 0, 0)",
           tabBarStyle: {
             backgroundColor: "rgba(200, 180, 50, 0.5)",
             borderColor: "rgb(120, 0, 0)",
@@ -91,8 +89,8 @@ function NavBar() {
           }}
         />
         <Tab.Screen
-          name="Connexion"
-          component={Log}
+          name="Deconnect"
+          component={Deconnect}
           options={{
             tabBarIcon: ({ focused }) => {
               return (
@@ -106,7 +104,6 @@ function NavBar() {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 }
 

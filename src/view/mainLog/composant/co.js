@@ -4,7 +4,7 @@ import { View, Text, TextInput, ImageBackground } from "react-native";
 import Service from "../../../../services";
 import styles from "../../../css/homeCss";
 
-function Connection(props) {
+function Connection( {navigation} ) {
   const [Mail, setMail] = useState("");
   const [Password, setPassword] = useState("");
   const [ErrMessage, setErrMessage] = useState("");
@@ -17,8 +17,8 @@ function Connection(props) {
     };
     let isConnecter = await Service.post(path, body);
     if (isConnecter?.data?.success) {
-      console.log(isConnecter?.data?.token);
-      setStorageValue(isConnecter?.data?.token, props.setIsConnect);
+      setStorageValue(isConnecter?.data?.token);
+      navigation.navigate("NavBar")
     } else {
       setErrMessage(isConnecter?.data?.message);
     }
